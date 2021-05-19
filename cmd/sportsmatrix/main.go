@@ -195,6 +195,13 @@ func (r *rootArgs) setConfigDefaults() {
 	}
 	r.config.NCAAMConfig.SetDefaults()
 
+	if r.config.NCAAFConfig == nil {
+		r.config.NCAAFConfig = &sportboard.Config{
+			Enabled: atomic.NewBool(false),
+		}
+	}
+	r.config.NCAAFConfig.SetDefaults()
+
 	if r.config.NBAConfig == nil {
 		r.config.NBAConfig = &sportboard.Config{
 			Enabled: atomic.NewBool(false),
@@ -320,6 +327,19 @@ func (r *rootArgs) getBoards(ctx context.Context, logger *zap.Logger) ([]board.B
 
 		boards = append(boards, b)
 	}
+	if r.config.NCAAFConfig != nil {
+		api, err := espnboard.NewNCAAF(ctx, logger)
+		if err != nil {
+			return boards, err
+		}
+
+		b, err := sportboard.New(ctx, api, bounds, logger, r.config.NCAAFConfig)
+		if err != nil {
+			return boards, err
+		}
+
+		boards = append(boards, b)
+	}
 	if r.config.NBAConfig != nil {
 		api, err := espnboard.NewNBA(ctx, logger)
 		if err != nil {
@@ -420,6 +440,7 @@ func (r *rootArgs) setTodayFuncs(today string) error {
 	r.config.NHLConfig.TodayFunc = f
 	r.config.MLBConfig.TodayFunc = f
 	r.config.NCAAMConfig.TodayFunc = f
+	r.config.NCAAFConfig.TodayFunc = f
 	r.config.NBAConfig.TodayFunc = f
 	r.config.NFLConfig.TodayFunc = f
 	r.config.MLSConfig.TodayFunc = f

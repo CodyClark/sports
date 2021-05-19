@@ -101,3 +101,26 @@ func (n *mls) HTTPPathPrefix() string {
 func NewMLS(ctx context.Context, logger *zap.Logger) (*ESPNBoard, error) {
 	return New(ctx, &mls{}, logger)
 }
+
+type ncaaf struct{}
+
+func (n *ncaaf) League() string {
+	return "MLS"
+}
+
+func (n *ncaaf) APIPath() string {
+	return "football/college-football"
+}
+
+func (n *ncaaf) TeamEndpoints() []string {
+	return []string{filepath.Join(n.APIPath(), "teams")}
+}
+
+func (n *ncaaf) HTTPPathPrefix() string {
+	return "ncaaf"
+}
+
+// NewNCAAF ...
+func NewNCAAF(ctx context.Context, logger *zap.Logger) (*ESPNBoard, error) {
+	return New(ctx, &ncaaf{}, logger)
+}

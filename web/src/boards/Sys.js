@@ -4,25 +4,30 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
-import clock from './clock.png';
-import Form from 'react-bootstrap/Form';
+import server from '../logos/server.png';
+import { FormControlLabel, Switch } from '@material-ui/core';
 
 var BACKEND = "http://" + window.location.host
 
-class Clock extends React.Component {
+const switchDefaults = {
+    color: 'primary',
+    size: 'small'
+}
+
+class Sys extends React.Component {
     constructor(props) {
         super(props);
         this.state = { "disablerChecked": false };
     }
     callmatrix(path) {
-        console.log(`Calling matrix Image Board /clock/${path}`)
-        fetch(`${BACKEND}/api/clock/${path}`, {
+        console.log(`Calling matrix Sys Board /clock/${path}`)
+        fetch(`${BACKEND}/api/sys/${path}`, {
             method: "GET",
             mode: "cors",
         });
     }
     async componentDidMount() {
-        const resp = await fetch(`${BACKEND}/api/clock/status`,
+        const resp = await fetch(`${BACKEND}/api/sys/status`,
             {
                 method: "GET",
                 mode: "cors",
@@ -54,16 +59,18 @@ class Clock extends React.Component {
     }
     render() {
         return (
-            <Container fluid>
-                <Row className="text-center"><Col><Image src={clock} style={{ height: '100px', width: 'auto' }} fluid /></Col></Row>
-                <Row className="text-center">
+            <Container fluid style={{minHeight: '350px'}}>
+                <Row className="text-center pt-2"><Col><Image src={server} style={{ height: '100px', width: 'auto' }} fluid /></Col></Row>
+                <Row className="pt-4">
                     <Col>
-                        <Form.Switch id="clockenabler" label="Enable/Disable" checked={this.state.disablerChecked} onChange={this.handleSwitch} />
-                    </Col>
+                    <FormControlLabel control={
+                        <Switch id="sysenabler" checked={this.state.disablerChecked} onChange={this.handleSwitch} color={switchDefaults.color} size={switchDefaults.size} />
+                    } label="Enable/Disable" />
+                        </Col>
                 </Row>
             </Container>
         )
     }
 }
 
-export default Clock;
+export default Sys;

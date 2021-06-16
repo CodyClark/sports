@@ -1,15 +1,18 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from './Home.js';
-import Sport from './Sport.js';
-import Pga from './Pga.js';
-import ImageBoard from './ImageBoard.js';
-import Clock from './Clock.js';
+import Sport from './boards/Sport.js';
+import Pga from './boards/Pga.js';
+import ImageBoard from './boards/ImageBoard.js';
+import Clock from './boards/Clock.js';
 import Board from './Board.js';
-import Sys from './Sys.js';
+import Sys from './boards/Sys.js';
 import TopNav from './Nav.js';
 import All from './All.js';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCheckSquare, faCoffee, faCogs, faClock } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faCheckSquare, faCoffee, faCogs, faClock)
 
 var BACKEND = "http://" + window.location.host
 

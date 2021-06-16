@@ -45,7 +45,7 @@ class TopNav extends React.Component {
                             <Nav.Link as={Link} to="/sys">System Info</Nav.Link>
                             <Nav.Link as={Link} to="/board">Live Board</Nav.Link>
                         </Nav>
-                        <Navbar.Text>{this.state.version}</Navbar.Text>
+                        {/* <Navbar.Text>{this.state.version}</Navbar.Text> */}
                     </Navbar.Collapse>
                 </Navbar>
             </Container >

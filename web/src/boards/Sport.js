@@ -30,6 +30,8 @@ class Sport extends React.Component {
             "scroll": false,
             "statscroll": false,
             "tightscroll": false,
+            "record": false,
+            "odds": false,
         };
     }
     async componentDidMount() {
@@ -66,6 +68,16 @@ class Sport extends React.Component {
         await GetStatus(`${this.props.sport}/favoritestickystatus`, (val) => {
             this.setState({
                 "stickyFavorite": val,
+            })
+        })
+        await GetStatus(`${this.props.sport}/oddsstatus`, (val) => {
+            this.setState({
+                "odds": val,
+            })
+        })
+        await GetStatus(`${this.props.sport}/recordrankstatus`, (val) => {
+            this.setState({
+                "record": val,
             })
         })
     }
@@ -154,6 +166,22 @@ class Sport extends React.Component {
                           <Switch id={this.props.sport + "favscore"}  checked={this.state.hideFavorite} color={switchDefaults.color} size={switchDefaults.size} 
                             onChange={() => this.handleSwitch(`${this.props.sport}/hidefavoritescore`, `${this.props.sport}/showfavoritescore`, "hideFavorite")} />
                         } label="Hide Favorite Scores"/>
+                    </Col>
+                </Row>
+                <Row className="">
+                    <Col>
+                    <FormControlLabel control={
+                          <Switch id={this.props.sport + "favscore"}  checked={this.state.hideFavorite} color={switchDefaults.color} size={switchDefaults.size} 
+                            onChange={() => this.handleSwitch(`${this.props.sport}/hidefavoritescore`, `${this.props.sport}/showfavoritescore`, "hideFavorite")} />
+                        } label="Show Odds"/>
+                    </Col>
+                </Row>
+                <Row className="">
+                    <Col>
+                        <FormControlLabel control={
+                            <Switch id={this.props.sport + "favscore"}  checked={this.state.hideFavorite} color={switchDefaults.color} size={switchDefaults.size} 
+                            onChange={() => this.handleSwitch(`${this.props.sport}/hidefavoritescore`, `${this.props.sport}/showfavoritescore`, "hideFavorite")} />
+                        } label="Record + Rank"/>
                     </Col>
                 </Row>
                 <Row className="">

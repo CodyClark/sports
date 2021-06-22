@@ -54,7 +54,7 @@ class Pga extends React.Component {
     }
     render() {
         return (
-            <Container fluid style={{minHeight: '372px'}}>
+            <Container fluid style={{}}>
                 <Row className="text-center pt-2">
                     <Col>
                         <Image src={this.logosrc()} style={{ height: '100px', width: 'auto' }} fluid />

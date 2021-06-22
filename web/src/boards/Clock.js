@@ -58,7 +58,7 @@ class Clock extends React.Component {
     }
     render() {
         return (
-            <Container fluid style={{minHeight: '350px'}}>
+            <Container fluid style={{}}>
                 <Row className="text-center pt-3">
                     <Col>
                     <FontAwesomeIcon icon="clock" size='5x' />

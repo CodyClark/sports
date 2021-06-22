@@ -59,7 +59,7 @@ class Sys extends React.Component {
     }
     render() {
         return (
-            <Container fluid style={{minHeight: '350px'}}>
+            <Container fluid style={{}}>
                 <Row className="text-center pt-2"><Col><Image src={server} style={{ height: '100px', width: 'auto' }} fluid /></Col></Row>
                 <Row className="pt-4">
                     <Col>

@@ -50,7 +50,7 @@ class ImageBoard extends React.Component {
 
     render() {
         return (
-            <Container fluid style={{minHeight: '372px'}}>
+            <Container fluid style={{}}>
                 <Row className="text-center"><Col><Image src={imgimg} style={{ height: '100px', width: 'auto' }} fluid /></Col></Row>
                 <Row className="pt-4">
                     <Col>

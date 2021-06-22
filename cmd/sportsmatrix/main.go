@@ -99,11 +99,7 @@ func newRootCmd(args *rootArgs) *cobra.Command {
 
 			args.setConfigDefaults()
 
-			if err := args.setTodayFuncs(viper.GetString("date-str")); err != nil {
-				return err
-			}
-
-			return nil
+			return args.setTodayFuncs(viper.GetString("date-str"))
 		},
 	}
 
@@ -276,7 +272,11 @@ func (r *rootArgs) getBoards(ctx context.Context, logger *zap.Logger) ([]board.B
 	}
 
 	if r.config.NHLConfig != nil && nhlAPI != nil {
-		b, err := sportboard.New(ctx, nhlAPI, bounds, logger, r.config.NHLConfig)
+		api, err := espnboard.NewNHL(ctx, logger)
+		if err != nil {
+			return boards, err
+		}
+		b, err := sportboard.New(ctx, api, bounds, logger, r.config.NHLConfig)
 		if err != nil {
 			return boards, err
 		}
@@ -293,7 +293,11 @@ func (r *rootArgs) getBoards(ctx context.Context, logger *zap.Logger) ([]board.B
 		boards = append(boards, b)
 	}
 	if r.config.MLBConfig != nil {
-		b, err := sportboard.New(ctx, mlbAPI, bounds, logger, r.config.MLBConfig)
+		api, err := espnboard.NewMLB(ctx, logger)
+		if err != nil {
+			return boards, err
+		}
+		b, err := sportboard.New(ctx, api, bounds, logger, r.config.MLBConfig)
 		if err != nil {
 			return boards, err
 		}

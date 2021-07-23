@@ -1,13 +1,17 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
-import imgimg from './image.png';
-import Form from 'react-bootstrap/Form';
-import { GetStatus, CallMatrix } from './util';
+import imgimg from '../logos/image.png';
+import { GetStatus, CallMatrix } from '../util';
+import { FormControlLabel, Switch } from '@material-ui/core';
+
+const switchDefaults = {
+    color: 'primary',
+    size: 'small'
+}
 
 class ImageBoard extends React.Component {
     constructor(props) {
@@ -46,24 +50,30 @@ class ImageBoard extends React.Component {
 
     render() {
         return (
-            <Container fluid>
+            <Container fluid style={{}}>
                 <Row className="text-center"><Col><Image src={imgimg} style={{ height: '100px', width: 'auto' }} fluid /></Col></Row>
-                <Row className="text-center">
+                <Row className="pt-4">
                     <Col>
-                        <Form.Switch id="imgenabler" label="Enable/Disable" checked={this.state.enabled}
-                            onChange={() => this.handleSwitch("img/enable", "img/disable", "enabled")} />
+                        <FormControlLabel control={
+                            <Switch checked={this.state.enabled} color={switchDefaults.color} size={switchDefaults.size} 
+                                onChange={() => this.handleSwitch("img/enable", "img/disable", "enabled")} />
+                             } label="Enable/Disable" />
                     </Col>
                 </Row>
-                <Row className="text-center">
+                <Row className="">
                     <Col>
-                        <Form.Switch id="imgmem" label="Enable Memory Cache" checked={this.state.memcache}
+                    <FormControlLabel control={
+                        <Switch id="imgmem" checked={this.state.memcache} color={switchDefaults.color} size={switchDefaults.size} 
                             onChange={() => this.handleSwitch("img/enablememcache", "img/disablememcache", "memcache")} />
+                        }  label="Enable Memory Cache" />
                     </Col>
                 </Row>
-                <Row className="text-center">
+                <Row className="">
                     <Col>
-                        <Form.Switch id="imgdisk" label="Enable Disk Cache" checked={this.state.diskcache}
-                            onChange={() => this.handleSwitch("img/enablediskcache", "img/disablediskcache", "diskcache")} />
+                        <FormControlLabel control={
+                            <Switch id="imgdisk"  checked={this.state.diskcache} color={switchDefaults.color} size={switchDefaults.size} 
+                                onChange={() => this.handleSwitch("img/enablediskcache", "img/disablediskcache", "diskcache")} />
+                        } label="Enable Disk Cache" />
                     </Col>
                 </Row>
             </Container>

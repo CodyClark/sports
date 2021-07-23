@@ -2,9 +2,10 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
 import { GetStatus, CallMatrix } from './util.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FormControlLabel, Switch } from '@material-ui/core';
 
 class Home extends React.Component {
     constructor(props) {
@@ -37,11 +38,28 @@ class Home extends React.Component {
 
     render() {
         return (
-            <Container fluid>
+            <Container fluid style={{minHeight: '372px'}}>
                 <Row className="text-center">
                     <Col>
-                        <Form.Switch id="screen" label="Screen On/Off" checked={this.state["screen"]} onChange={() => this.handleSwitch("screenon", "screenoff", "screen")} />
-                        <Form.Switch id="webboard" label="Web Board On/Off" checked={this.state["webboard"]} onChange={() => this.handleSwitch("webboardon", "webboardoff", "webboard")} />
+                        <Row className="text-center pt-2">
+                            <Col>
+                                <FontAwesomeIcon icon="cogs" size='5x' />
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+                <Row className="pt-5">
+                    <Col>
+                    <FormControlLabel control={
+                        <Switch color="primary" size="small" id="screen" checked={this.state["screen"]} onChange={() => this.handleSwitch("screenon", "screenoff", "screen")} />
+                    } label="Screen On/Off" />
+                    </Col>
+                </Row>
+                <Row className="">
+                    <Col>
+                    <FormControlLabel control={
+                         <Switch color="primary" size="small" id="webboard" checked={this.state["webboard"]} onChange={() => this.handleSwitch("webboardon", "webboardoff", "webboard")} />
+                    } label="Web Board On/Off" />
                     </Col>
                 </Row>
             </Container>

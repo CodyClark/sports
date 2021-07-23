@@ -1,13 +1,17 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
 import Image from 'react-bootstrap/Image';
-import pgalogo from './pga.png'
-import { GetStatus, CallMatrix } from './util';
+import pgalogo from '../logos/pga-tour-logo.svg';
+import { GetStatus, CallMatrix } from '../util';
+import { FormControlLabel, Switch } from '@material-ui/core';
+
+const switchDefaults = {
+    color: 'primary',
+    size: 'small'
+}
 
 class Pga extends React.Component {
     constructor(props) {
@@ -50,18 +54,26 @@ class Pga extends React.Component {
     }
     render() {
         return (
-            <Container fluid>
-                <Row className="text-center"><Col><Image src={this.logosrc()} style={{ height: '100px', width: 'auto' }} fluid /></Col></Row>
-                <Row className="text-center">
+            <Container fluid style={{}}>
+                <Row className="text-center pt-2">
                     <Col>
-                        <Form.Switch id="pgastats" label="Enable/Disable" checked={this.state.stats}
-                            onChange={() => this.handleSwitch(`pga/stats/enable`, `pga/stats/disable`, "stats")} />
+                        <Image src={this.logosrc()} style={{ height: '100px', width: 'auto' }} fluid />
                     </Col>
                 </Row>
-                <Row className="text-center">
+                <Row className="pt-4">
                     <Col>
-                        <Form.Switch id="pgascroll" label="Scroll Mode" checked={this.state.scroll}
-                            onChange={() => this.handleSwitch(`pga/stats/scrollon`, `pga/stats/scrolloff`, "scroll")} />
+                        <FormControlLabel control={
+                            <Switch checked={this.state.stats} size={switchDefaults.size} color={switchDefaults.color}
+                                onChange={() => this.handleSwitch(`pga/stats/enable`, `pga/stats/disable`, "stats")} />
+                        } label="Enable/Disable"/>
+                    </Col>
+                </Row>
+                <Row className="">
+                    <Col>
+                        <FormControlLabel control={
+                            <Switch id="pgascroll"  checked={this.state.scroll} size={switchDefaults.size} color={switchDefaults.color}
+                                onChange={() => this.handleSwitch(`pga/stats/scrollon`, `pga/stats/scrolloff`, "scroll")} />
+                        } label="Scroll Mode" />
                     </Col>
                 </Row>
             </Container>

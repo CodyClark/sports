@@ -5,7 +5,7 @@ set -x
 
 ARCH="$(uname -m)"
 
-latesturl="https://api.github.com/repos/robbydyer/sports/releases/latest"
+latesturl="https://api.github.com/repos/codyclark/sports/releases/latest"
 
 tmp="$(mktemp -d /tmp/sportsinstall.XXXX)"
 trap "rm -rf ${tmp}" EXIT
